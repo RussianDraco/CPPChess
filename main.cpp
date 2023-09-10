@@ -1,4 +1,4 @@
-//COMPILE FUNCTION: gcc -o main -Wall main.cpp -mwindows glut32.lib -lopengl32 -lglu32
+//COMPILE FUNCTION: g++ -o main -Wall main.cpp -mwindows glut32.lib -lopengl32 -lglu32
 
 #include <stdio.h>
 //#include <iostream>
