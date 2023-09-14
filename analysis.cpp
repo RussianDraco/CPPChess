@@ -7,9 +7,22 @@ using namespace std;
 #define MAX_DEPTH 10
 #define PLAYER_COLOR 1 //1 - white, 0 - black
 
+
+
 vector<string> possible_moves(string pos) {
     vector <string> ps;
-    ps.push(pos);
+    char[][] fullpos;
+    
+    int row = 0;
+
+    for (int i = 0; i < pos.length(); i++) {
+        if (pos[i] == '/') {
+            row++;
+        } else {
+            //make full board 2d array here
+        } 
+    }
+
     return ps;
 }
 
