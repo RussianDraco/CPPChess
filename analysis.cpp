@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#define MAX_DEPTH 20
+#define MAX_DEPTH 10
 #define PLAYER_COLOR 1 //1 - white, 0 - black
 
 vector<string> possible_moves(string pos) {
@@ -50,7 +50,7 @@ int analyse_position(string pos, int turn, int depth) {//1 - player, 0 - opponen
         }
     }
 
-    return best;
+    return best; //add function to respond with the best move too
 }
 
 int main() {
