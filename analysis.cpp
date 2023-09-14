@@ -12,8 +12,26 @@ bool is_number(const string& s)
     return( strspn( s.c_str(), "-.0123456789" ) == s.size() );
 }
 
-vector<string> possible_moves(string pos) {
-    vector <string> ps;
+string build_fen(char brd[8][8]) {
+    int empties = 0;
+    string outfen = "";
+
+    for (int rn1 = 0; rn1 < 8; rn1++) {
+        for (char c: brd[rn1]) {
+            if (c == '_') {
+                empties++;
+            } else {
+                if (empties != 0) {outfen += to_string(empties); empties = 0;}
+                outfen += c;
+            }
+        }
+        if (empties != 0) {outfen += to_string(empties); empties = 0;}
+        outfen += '/';
+    }
+}
+
+vector<string> possible_moves(string pos, int turn) {//1 - player, 0 - opponent
+    vector<string> ps;
     char fullpos[8][8];
     
     int row = 0;
@@ -34,6 +52,20 @@ vector<string> possible_moves(string pos) {
                 arpos++;
             }
         } 
+    }
+
+    char temppos[8][8];
+    int n = 0;
+    for (int rn = 0; rn < 8; rn++) {
+        n = 0;
+        for (char c: fullpos[rn]) {
+            if (c == 'p') {
+                if (fullpos[rn + 1][n] == '_') {
+                    
+                }
+            }
+            n++;
+        }
     }
 
     return ps;
@@ -66,12 +98,12 @@ int analyse_position(string pos, int turn, int depth) {//1 - player, 0 - opponen
     int best;
     if (turn == 1) {
         best = -999;
-        for (auto p : possible_moves(pos)) {
+        for (auto p : possible_moves(pos, 1)) {
             best = max(best, analyse_position(p, 0, depth + 1));
         }
     } else {
         best = 999;
-        for (auto p : possible_moves(pos)) {
+        for (auto p : possible_moves(pos, 0)) {
             best = min(best, analyse_position(p, 1, depth + 1));
         }
     }
