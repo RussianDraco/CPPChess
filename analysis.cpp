@@ -7,19 +7,32 @@ using namespace std;
 #define MAX_DEPTH 10
 #define PLAYER_COLOR 1 //1 - white, 0 - black
 
-
+bool is_number(const string& s)
+{
+    return( strspn( s.c_str(), "-.0123456789" ) == s.size() );
+}
 
 vector<string> possible_moves(string pos) {
     vector <string> ps;
-    char[][] fullpos;
+    char fullpos[8][8];
     
     int row = 0;
+    int arpos = 0;
 
-    for (int i = 0; i < pos.length(); i++) {
-        if (pos[i] == '/') {
+    for (char c: pos) {
+        if (c == '/') {
             row++;
+            arpos = 0;
         } else {
-            //make full board 2d array here
+            if (isdigit(c)) {
+                for (int j = 0; j < (c - '0'); j++) {
+                    fullpos[row][j] = '_';
+                    arpos++;
+                }
+            } else {
+                fullpos[row][arpos] = c;
+                arpos++;
+            }
         } 
     }
 
