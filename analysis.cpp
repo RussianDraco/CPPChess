@@ -61,7 +61,11 @@ vector<string> possible_moves(string pos, int turn) {//1 - player, 0 - opponent
         for (char c: fullpos[rn]) {
             if (c == 'p') {
                 if (fullpos[rn + 1][n] == '_') {
-                    
+                    fullpos[rn][n] = '_';
+                    fullpos[rn + 1][n] = 'p';
+                    ps.push_back(build_fen(fullpos));
+                    fullpos[rn][n] = 'p';
+                    fullpos[rn + 1][n] = '_';
                 }
             }
             n++;
